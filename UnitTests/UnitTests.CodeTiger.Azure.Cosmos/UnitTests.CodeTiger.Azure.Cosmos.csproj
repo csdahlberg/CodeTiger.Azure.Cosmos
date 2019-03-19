@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <NoWarn>1701</NoWarn>
+    <RootNamespace>UnitTests.CodeTiger.Azure.Cosmos</RootNamespace>
+    <Product>CodeTiger.Azure.Cosmos</Product>
+    <Authors>Chris Dahlberg</Authors>
+    <Company>Chris Dahlberg</Company>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <VersionSuffix>unofficial</VersionSuffix>
+    <FileVersion>0.0.1.0</FileVersion>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\CodeTiger.Azure.Cosmos.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\Build\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\Build\Release\</OutputPath>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CodeTiger.Azure.Cosmos\CodeTiger.Azure.Cosmos.csproj" />
+  </ItemGroup>
+
+</Project>

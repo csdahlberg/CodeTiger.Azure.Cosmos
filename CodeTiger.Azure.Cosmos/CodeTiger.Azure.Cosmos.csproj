@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <VersionSuffix>unofficial</VersionSuffix>
+    <FileVersion>0.0.1.0</FileVersion>
+    <Authors>Chris Dahlberg</Authors>
+    <Company>Chris Dahlberg</Company>
+    <Description>A .NET library that provides additional functionality for interacting with Azure Cosmos DB.</Description>
+    <Copyright>Copyright © 2019 Chris Dahlberg</Copyright>
+    <PackageProjectUrl>https://github.com/csdahlberg/CodeTiger.Azure.Cosmos</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/csdahlberg/CodeTiger.Azure.Cosmos/wiki/License</PackageLicenseUrl>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageIconUrl>http://www.codetiger.net/images/tigerpaw32.png</PackageIconUrl>
+    <PackageTags>Azure Cosmos DocumentDB Aggregate</PackageTags>
+    <PackageReleaseNotes>This is an unofficial build that should not be distributed.</PackageReleaseNotes>
+    <IncludeSymbols>True</IncludeSymbols>
+    <IncludeSource>True</IncludeSource>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\CodeTiger.Azure.Cosmos.snk</AssemblyOriginatorKeyFile>
+    <NoWarn />
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <RootNamespace>CodeTiger.Azure.Cosmos</RootNamespace>
+    <DebugType>full</DebugType>
+    <DebugSymbols>True</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\Build\Debug\</OutputPath>
+    <DocumentationFile>..\Build\Debug\$(TargetFramework)\CodeTiger.Azure.Cosmos.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\Build\Release\</OutputPath>
+    <DocumentationFile>..\Build\Release\$(TargetFramework)\CodeTiger.Azure.Cosmos.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CodeTiger.CodeAnalysis" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="CodeTiger.Core" Version="2.0.0-beta01" />
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.0.0.1-preview" />
+  </ItemGroup>
+
+</Project>
