@@ -11,20 +11,21 @@
     <Description>A .NET library that provides additional functionality for interacting with Azure Cosmos DB.</Description>
     <Copyright>Copyright © 2019 Chris Dahlberg</Copyright>
     <PackageProjectUrl>https://github.com/csdahlberg/CodeTiger.Azure.Cosmos</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/csdahlberg/CodeTiger.Azure.Cosmos/wiki/License</PackageLicenseUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageIconUrl>http://www.codetiger.net/images/tigerpaw32.png</PackageIconUrl>
-    <PackageTags>Azure Cosmos DocumentDB Aggregate</PackageTags>
+    <PackageTags>Microsoft Azure CosmosDB Cosmos DB DocumentDB Document Aggregate Group GroupBy</PackageTags>
     <PackageReleaseNotes>This is an unofficial build that should not be distributed.</PackageReleaseNotes>
     <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <IncludeSource>True</IncludeSource>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\CodeTiger.Azure.Cosmos.snk</AssemblyOriginatorKeyFile>
     <NoWarn />
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <RootNamespace>CodeTiger.Azure.Cosmos</RootNamespace>
-    <DebugType>full</DebugType>
-    <DebugSymbols>True</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -46,6 +47,13 @@
     </PackageReference>
     <PackageReference Include="CodeTiger.Core" Version="2.0.0-beta01" />
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.0.0.1-preview" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
