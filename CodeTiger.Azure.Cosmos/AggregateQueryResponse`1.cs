@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using Microsoft.Azure.Cosmos;
+using Microsoft.Azure.Cosmos.Scripts;
 using Newtonsoft.Json;
 
 namespace CodeTiger.Azure.Cosmos
@@ -15,23 +16,18 @@ namespace CodeTiger.Azure.Cosmos
     /// <typeparam name="T">The type of the aggregates returned by the aggregate query.</typeparam>
     public class AggregateQueryResponse<T> : IEnumerable<T>
     {
-        private readonly CosmosItemResponse<AggregateDocumentQueryState> _storedProcedureResponse;
-        private readonly Lazy<string> _responseContinuation;
+        private readonly StoredProcedureExecuteResponse<AggregateDocumentQueryState> _storedProcedureResponse;
+        private readonly string _responseContinuation;
 
         /// <summary>
         /// Gets the headers in the response from executing the stored procedure.
         /// </summary>
-        public CosmosResponseMessageHeaders ResponseHeaders => _storedProcedureResponse.Headers;
+        public Headers ResponseHeaders => _storedProcedureResponse.Headers;
 
         /// <summary>
         /// Gets the status code from executing the stored procedure.
         /// </summary>
         public HttpStatusCode StatusCode => _storedProcedureResponse.StatusCode;
-
-        /// <summary>
-        /// Gets the token for use with session consistency requests.
-        /// </summary>
-        public string SessionToken => _storedProcedureResponse.SessionToken;
 
         /// <summary>
         /// Gets the Activity ID of the request.
@@ -48,12 +44,11 @@ namespace CodeTiger.Azure.Cosmos
         /// or <c>null</c> if the query has completed.
         /// </summary>
         public string ResponseContinuation => _storedProcedureResponse.Resource.ContinuationToken;
-
-        internal AggregateQueryResponse(
-            CosmosItemResponse<AggregateDocumentQueryState> storedProcedureResponse)
+        
+        internal AggregateQueryResponse(StoredProcedureExecuteResponse<AggregateDocumentQueryState> response)
         {
-            _storedProcedureResponse = storedProcedureResponse;
-            _responseContinuation = new Lazy<string>(CreateResponseContinuation);
+            _storedProcedureResponse = response;
+            _responseContinuation = response.Headers.ContinuationToken;
         }
 
         /// <summary>

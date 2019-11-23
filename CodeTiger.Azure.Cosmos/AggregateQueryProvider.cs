@@ -10,16 +10,16 @@ namespace CodeTiger.Azure.Cosmos
     /// </summary>
     public class AggregateQueryProvider : IAggregateQueryProvider
     {
-        private readonly CosmosContainer _container;
+        private readonly Container _container;
         private readonly AggregateQueryOptions _queryOptions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateQueryProvider"/> class.
         /// </summary>
-        /// <param name="container">The <see cref="CosmosContainer"/> object to use to interact with the Cosmos
-        /// database when executing aggregate document queries.</param>
+        /// <param name="container">The <see cref="Container"/> object to use to interact with the Cosmos database
+        /// when executing aggregate document queries.</param>
         /// <param name="queryOptions">Specifies the options for the aggregate query.</param>
-        public AggregateQueryProvider(CosmosContainer container, AggregateQueryOptions queryOptions)
+        public AggregateQueryProvider(Container container, AggregateQueryOptions queryOptions)
         {
             _container = Guard.ArgumentIsNotNull(nameof(container), container);
             _queryOptions = Guard.ArgumentIsNotNull(nameof(queryOptions), queryOptions);

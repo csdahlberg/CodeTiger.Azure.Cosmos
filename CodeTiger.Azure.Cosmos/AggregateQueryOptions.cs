@@ -10,7 +10,7 @@ namespace CodeTiger.Azure.Cosmos
         /// <summary>
         /// Gets or sets the partition key for the aggregate query.
         /// </summary>
-        public object PartitionKey { get; set; }
+        public PartitionKey PartitionKey { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum number of aggregate results to be returned.

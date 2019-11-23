@@ -4,8 +4,7 @@ using Microsoft.Azure.Cosmos;
 namespace CodeTiger.Azure.Cosmos
 {
     /// <summary>
-    /// Provides extension methods for creating aggregate document queries from <see cref="CosmosContainer"/>
-    /// objects.
+    /// Provides extension methods for creating aggregate document queries from <see cref="Container"/> objects.
     /// </summary>
     public static class CosmosContainerExtensions
     {
@@ -17,7 +16,7 @@ namespace CodeTiger.Azure.Cosmos
         /// <param name="queryOptions">Specifies the options for the aggregate query.</param>
         /// <returns>A query for aggregating data from documents.</returns>
         public static IAggregateQueryable<T> CreateAggregateDocumentQuery<T>(
-            this CosmosContainer container, AggregateQueryOptions queryOptions)
+            this Container container, AggregateQueryOptions queryOptions)
         {
             Guard.ArgumentIsNotNull(nameof(container), container);
 

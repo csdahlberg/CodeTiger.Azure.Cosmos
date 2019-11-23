@@ -12,7 +12,7 @@ namespace CodeTiger.Azure.Cosmos
     /// <typeparam name="T">The type of the results of the query.</typeparam>
     internal class AggregateDocumentQuery<T> : IAggregateDocumentQuery<T>, IAggregateQueryable<T>
     {
-        private readonly CosmosContainer _container;
+        private readonly Container _container;
         private readonly AggregateQueryOptions _queryOptions;
 
         private IAggregateDocumentQueryExecutionContext<T> _executionContext;
@@ -37,10 +37,10 @@ namespace CodeTiger.Azure.Cosmos
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateDocumentQuery{T}"/> class.
         /// </summary>
-        /// <param name="container">The <see cref="CosmosContainer"/> object to use to interact with the Cosmos
-        /// database when executing aggregate document queries.</param>
+        /// <param name="container">The <see cref="Container"/> object to use to interact with the Cosmos database
+        /// when executing aggregate document queries.</param>
         /// <param name="queryOptions">Specifies the options for the aggregate query.</param>
-        public AggregateDocumentQuery(CosmosContainer container, AggregateQueryOptions queryOptions)
+        public AggregateDocumentQuery(Container container, AggregateQueryOptions queryOptions)
             : this(container, queryOptions, null)
         {
         }
@@ -48,12 +48,12 @@ namespace CodeTiger.Azure.Cosmos
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateDocumentQuery{T}"/> class.
         /// </summary>
-        /// <param name="container">The <see cref="CosmosContainer"/> object to use to interact with the Cosmos
-        /// database when executing aggregate document queries.</param>
+        /// <param name="container">The <see cref="Container"/> object to use to interact with the Cosmos database
+        /// when executing aggregate document queries.</param>
         /// <param name="queryOptions">Specifies the options for the aggregate query.</param>
         /// <param name="expression">The expression representing the query for aggregate data, or <c>null</c> if
         /// this is the initial <see cref="AggregateDocumentQuery{T}"/> being created for a query.</param>
-        public AggregateDocumentQuery(CosmosContainer container, AggregateQueryOptions queryOptions,
+        public AggregateDocumentQuery(Container container, AggregateQueryOptions queryOptions,
             Expression expression)
         {
             _container = container;
