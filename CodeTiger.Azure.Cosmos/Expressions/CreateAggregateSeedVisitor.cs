@@ -190,7 +190,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                 return "null";
             }
 
-            var evaluatedValue = ExpressionUtilities.GetEvaluatedValue(expression);
+            object evaluatedValue = ExpressionUtilities.GetEvaluatedValue(expression);
 
             if (evaluatedValue == null)
             {
@@ -268,7 +268,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                 throw new NotImplementedException();
             }
 
-            var defaultValue = Activator.CreateInstance(expression.NewExpression.Type,
+            object defaultValue = Activator.CreateInstance(expression.NewExpression.Type,
                 expression.NewExpression.Arguments.Cast<ConstantExpression>().Select(x => x.Value).ToArray());
 
             var sb = new StringBuilder("{ ");
@@ -368,7 +368,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                 throw new NotImplementedException();
             }
 
-            var defaultValue = Activator.CreateInstance(expression.Type,
+            object defaultValue = Activator.CreateInstance(expression.Type,
                 expression.Arguments.Cast<ConstantExpression>().Select(x => x.Value).ToArray());
 
             var sb = new StringBuilder("{ ");
