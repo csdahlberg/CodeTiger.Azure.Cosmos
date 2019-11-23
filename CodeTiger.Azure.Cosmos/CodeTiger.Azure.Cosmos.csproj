@@ -17,7 +17,6 @@
     <PackageTags>Microsoft Azure CosmosDB Cosmos DB DocumentDB Document Aggregate Group GroupBy</PackageTags>
     <PackageReleaseNotes>This is an unofficial build that should not be distributed.</PackageReleaseNotes>
     <IncludeSymbols>True</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <IncludeSource>True</IncludeSource>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\CodeTiger.Azure.Cosmos.snk</AssemblyOriginatorKeyFile>
@@ -26,6 +25,9 @@
     <RootNamespace>CodeTiger.Azure.Cosmos</RootNamespace>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <RepositoryUrl>https://github.com/csdahlberg/CodeTiger.Azure.Cosmos.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
