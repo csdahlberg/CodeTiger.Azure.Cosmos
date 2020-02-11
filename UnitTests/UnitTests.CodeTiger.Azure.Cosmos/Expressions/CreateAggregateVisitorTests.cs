@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq.Expressions;
 using CodeTiger.Azure.Cosmos.Expressions;
 using UnitTests.CodeTiger.Azure.Cosmos.TestDocumentTypes;
@@ -93,7 +94,7 @@ namespace UnitTests.CodeTiger.Azure.Cosmos.Expressions
 
                 string actual = CreateAggregateVisitor.Visit(createAggregateFunc);
 
-                Assert.Equal("{ \"Value\": \"" + dateTime.ToString("O") + "\" }",
+                Assert.Equal("{ \"value\": \"" + dateTime.ToString("O", CultureInfo.InvariantCulture) + "\" }",
                     actual);
             }
         }

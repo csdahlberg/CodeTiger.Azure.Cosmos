@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -219,7 +220,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
 
             if (evaluatedValueType == typeof(DateTime))
             {
-                return "\"" + ((DateTime)evaluatedValue).ToString("O") + "\"";
+                return "\"" + ((DateTime)evaluatedValue).ToString("O", CultureInfo.InvariantCulture) + "\"";
             }
 
             throw new NotImplementedException();

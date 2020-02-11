@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -276,7 +277,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
 
                         queryParameters[parameterName] = string.Join("-",
                             expression.Arguments.Cast<ConstantExpression>()
-                                .Select(x => ((int)x.Value).ToString("00")));
+                                .Select(x => ((int)x.Value).ToString("00", CultureInfo.InvariantCulture)));
 
                         return parameterName;
                     }

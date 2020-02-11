@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -54,7 +55,7 @@ namespace CodeTiger.Azure.Cosmos
 
         private static string ConvertToIdSafeString(byte[] input)
         {
-            return string.Concat(input.Select(x => x.ToString("x2")));
+            return string.Concat(input.Select(x => x.ToString("x2", CultureInfo.InvariantCulture)));
         }
     }
 }
