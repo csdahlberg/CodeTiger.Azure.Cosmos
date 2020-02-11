@@ -50,7 +50,7 @@ namespace UnitTests.CodeTiger.Azure.Cosmos.Expressions
                 Expression<Func<SaleAggregate, SaleSummary>> createResultFunc = aggregate
                     => new SaleSummary(1) { TotalAmount = 2.5m };
 
-                var actual = CreateResultVisitor.Visit(createResultFunc);
+                string actual = CreateResultVisitor.Visit(createResultFunc);
 
                 Assert.Equal("{ \"averageAmount\": 1.0, \"totalAmount\": 2.5 }", actual);
             }
