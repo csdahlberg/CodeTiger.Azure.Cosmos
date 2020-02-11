@@ -32,11 +32,11 @@ namespace CodeTiger.Azure.Cosmos
             string storedProcedureBody = new StringBuilder(StoredProcedureTemplate)
                 .Replace(QueryPlaceholder, GetQuery(expressions, queryParameters))
                 .Replace(CreateAggregateSeedFunctionPlaceholder,
-                    GetCreateAggregateSeedFunction(expressions, queryParameters))
+                    GetCreateAggregateSeedFunction(expressions))
                 .Replace(CreateAggregateFunctionPlaceholder, GetCreateAggregateFunction(expressions))
                 .Replace(CreateResultFunctionPlaceholder, GetCreateResultFunction(expressions))
                 .Replace(ShouldStartNewAggregateFunctionPlaceholder,
-                    GetShouldStartNewAggregateFunction(expressions, queryParameters))
+                    GetShouldStartNewAggregateFunction(expressions))
                 .ToString();
 
             return new AggregateStoredProcedure(storedProcedureBody, queryParameters);
@@ -127,8 +127,7 @@ namespace CodeTiger.Azure.Cosmos
             return queryBuilder.ToString();
         }
 
-        private static string GetCreateAggregateSeedFunction(QueryExpressions expressions,
-            Dictionary<string, object> queryParameters)
+        private static string GetCreateAggregateSeedFunction(QueryExpressions expressions)
         {
             if (expressions.CreateAggregateSeedExpression == null)
             {
@@ -153,8 +152,7 @@ namespace CodeTiger.Azure.Cosmos
             return "return " + CreateResultVisitor.Visit(expressions.CreateResultExpression) + ";";
         }
 
-        private static string GetShouldStartNewAggregateFunction(QueryExpressions expressions,
-            Dictionary<string, object> queryParameters)
+        private static string GetShouldStartNewAggregateFunction(QueryExpressions expressions)
         {
             if (expressions.GroupByExpression == null)
             {

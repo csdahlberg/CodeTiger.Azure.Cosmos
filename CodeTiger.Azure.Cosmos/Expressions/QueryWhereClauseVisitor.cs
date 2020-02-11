@@ -64,7 +64,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                 case ExpressionType.Conditional:
                     return VisitSubExpression((ConditionalExpression)expression, sourceParameter, queryParameters);
                 case ExpressionType.Constant:
-                    return VisitSubExpression((ConstantExpression)expression, sourceParameter, queryParameters);
+                    return VisitSubExpression((ConstantExpression)expression, queryParameters);
                 case ExpressionType.Default:
                     return VisitSubExpression((DefaultExpression)expression, sourceParameter, queryParameters);
                 case ExpressionType.ArrayIndex:
@@ -86,9 +86,9 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                 case ExpressionType.NewArrayInit:
                     return VisitSubExpression((NewArrayExpression)expression, sourceParameter, queryParameters);
                 case ExpressionType.New:
-                    return VisitSubExpression((NewExpression)expression, sourceParameter, queryParameters);
+                    return VisitSubExpression((NewExpression)expression, queryParameters);
                 case ExpressionType.Parameter:
-                    return VisitSubExpression((ParameterExpression)expression, sourceParameter, queryParameters);
+                    return VisitSubExpression((ParameterExpression)expression, sourceParameter);
                 case ExpressionType.ArrayLength:
                 case ExpressionType.IsFalse:
                 case ExpressionType.IsTrue:
@@ -181,7 +181,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
         }
 
         private static string VisitSubExpression(ConstantExpression expression,
-            ParameterExpression sourceParameter, IDictionary<string, object> queryParameters)
+            IDictionary<string, object> queryParameters)
         {
             if (expression.Type == typeof(string) || expression.Type == typeof(decimal)
                 || expression.Type.IsPrimitive)
@@ -231,8 +231,8 @@ namespace CodeTiger.Azure.Cosmos.Expressions
             switch (expression.Expression.NodeType)
             {
                 case ExpressionType.Parameter:
-                    return VisitSubExpression((ParameterExpression)expression.Expression, sourceParameter,
-                        queryParameters) + "." + ExpressionUtilities.GetJsonPropertyName(expression.Member);
+                    return VisitSubExpression((ParameterExpression)expression.Expression, sourceParameter)
+                        + "." + ExpressionUtilities.GetJsonPropertyName(expression.Member);
                 case ExpressionType.MemberAccess:
                     return VisitSubExpression((MemberExpression)expression.Expression, sourceParameter,
                         queryParameters) + "." + ExpressionUtilities.GetJsonPropertyName(expression.Member);
@@ -259,7 +259,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
             throw new NotImplementedException();
         }
 
-        private static string VisitSubExpression(NewExpression expression, ParameterExpression sourceParameter,
+        private static string VisitSubExpression(NewExpression expression,
             IDictionary<string, object> queryParameters)
         {
             if (expression.Type == typeof(DateTime))
@@ -287,7 +287,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
         }
 
         private static string VisitSubExpression(ParameterExpression expression,
-            ParameterExpression sourceParameter, IDictionary<string, object> queryParameters)
+            ParameterExpression sourceParameter)
         {
             if (expression != sourceParameter)
             {

@@ -64,7 +64,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                 case ExpressionType.Conditional:
                     return VisitSubExpression((ConditionalExpression)expression, aggregateParameter);
                 case ExpressionType.Constant:
-                    return VisitSubExpression((ConstantExpression)expression, aggregateParameter);
+                    return VisitSubExpression((ConstantExpression)expression);
                 case ExpressionType.Default:
                     return VisitSubExpression((DefaultExpression)expression, aggregateParameter);
                 case ExpressionType.ArrayIndex:
@@ -86,7 +86,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                 case ExpressionType.NewArrayInit:
                     return VisitSubExpression((NewArrayExpression)expression, aggregateParameter);
                 case ExpressionType.New:
-                    return VisitSubExpression((NewExpression)expression, aggregateParameter);
+                    return VisitSubExpression((NewExpression)expression);
                 case ExpressionType.Parameter:
                     return VisitSubExpression((ParameterExpression)expression, aggregateParameter);
                 case ExpressionType.ArrayLength:
@@ -182,8 +182,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                 + " : " + VisitSubExpression(expression.IfFalse, aggregateParameter) + ")";
         }
 
-        private static string VisitSubExpression(ConstantExpression expression,
-            ParameterExpression aggregateParameter)
+        private static string VisitSubExpression(ConstantExpression expression)
         {
             if (expression.Value == null)
             {
@@ -255,7 +254,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                     return VisitSubExpression((MemberExpression)expression.Expression, aggregateParameter)
                         + "." + ExpressionUtilities.GetJsonPropertyName(expression.Member);
                 case ExpressionType.Constant:
-                    return VisitSubExpression((ConstantExpression)expression.Expression, aggregateParameter);
+                    return VisitSubExpression((ConstantExpression)expression.Expression);
                 default:
                     throw new NotImplementedException();
             }
@@ -363,7 +362,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
             throw new NotImplementedException();
         }
 
-        private static string VisitSubExpression(NewExpression expression, ParameterExpression aggregateParameter)
+        private static string VisitSubExpression(NewExpression expression)
         {
             if (expression.Arguments?.Any(x => x.NodeType != ExpressionType.Constant) == true)
             {

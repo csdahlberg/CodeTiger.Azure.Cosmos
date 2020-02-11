@@ -49,8 +49,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                         currentMemberPath);
                     break;
                 case ExpressionType.MemberInit:
-                    VisitSubExpression((MemberInitExpression)expression, currentParameter, orderByProperties,
-                        currentMemberPath);
+                    VisitSubExpression((MemberInitExpression)expression, currentParameter, orderByProperties);
                     break;
                 case ExpressionType.Parameter:
                     VisitSubExpression((ParameterExpression)expression, currentParameter, orderByProperties,
@@ -105,7 +104,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
         }
 
         private static void VisitSubExpression(MemberInitExpression expression,
-            ParameterExpression currentParameter, List<string> orderByProperties, string currentMemberPath)
+            ParameterExpression currentParameter, List<string> orderByProperties)
         {
             if (expression.NewExpression.Arguments?.Any() == true)
             {
@@ -114,12 +113,12 @@ namespace CodeTiger.Azure.Cosmos.Expressions
 
             foreach (var memberBinding in expression.Bindings)
             {
-                VisitBinding(memberBinding, currentParameter, orderByProperties, currentMemberPath);
+                VisitBinding(memberBinding, currentParameter, orderByProperties);
             }
         }
 
         private static void VisitBinding(MemberBinding binding, ParameterExpression currentParameter,
-            List<string> orderByProperties, string currentMemberPath)
+            List<string> orderByProperties)
         {
             switch (binding.BindingType)
             {
