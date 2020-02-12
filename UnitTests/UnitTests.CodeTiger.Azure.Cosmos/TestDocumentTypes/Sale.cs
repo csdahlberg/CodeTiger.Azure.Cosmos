@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 
 namespace UnitTests.CodeTiger.Azure.Cosmos.TestDocumentTypes
 {
+    [SuppressMessage("Performance", "CA1812:Avoid uninstantiated internal classes",
+        Justification = "This type is used via reflection in some unit tests.")]
     internal class Sale
     {
         [JsonProperty("id")]

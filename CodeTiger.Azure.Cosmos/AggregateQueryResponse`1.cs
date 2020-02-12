@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using Microsoft.Azure.Cosmos;
@@ -14,6 +15,8 @@ namespace CodeTiger.Azure.Cosmos
     /// Represents a response from executing a stored procedure used to aggregate data from documents in Cosmos DB.
     /// </summary>
     /// <typeparam name="T">The type of the aggregates returned by the aggregate query.</typeparam>
+    [SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix",
+        Justification = "A 'Collection' suffix is not appropriate for this class.")]
     public class AggregateQueryResponse<T> : IEnumerable<T>
     {
         private readonly StoredProcedureExecuteResponse<AggregateDocumentQueryState> _storedProcedureResponse;
