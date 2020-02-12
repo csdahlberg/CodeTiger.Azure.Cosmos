@@ -17,7 +17,6 @@ namespace CodeTiger.Azure.Cosmos
     public class AggregateQueryResponse<T> : IEnumerable<T>
     {
         private readonly StoredProcedureExecuteResponse<AggregateDocumentQueryState> _storedProcedureResponse;
-        private readonly string _responseContinuation;
 
         /// <summary>
         /// Gets the headers in the response from executing the stored procedure.
@@ -48,7 +47,6 @@ namespace CodeTiger.Azure.Cosmos
         internal AggregateQueryResponse(StoredProcedureExecuteResponse<AggregateDocumentQueryState> response)
         {
             _storedProcedureResponse = response;
-            _responseContinuation = response.Headers.ContinuationToken;
         }
 
         /// <summary>
@@ -65,20 +63,6 @@ namespace CodeTiger.Azure.Cosmos
             }
 
             return Enumerable.Empty<T>().GetEnumerator();
-        }
-
-        private string CreateResponseContinuation()
-        {
-            var queryStateForResponseContinuation = new AggregateDocumentQueryState
-            {
-                Parameters = _storedProcedureResponse.Resource.Parameters,
-                MaxResultCount = _storedProcedureResponse.Resource.MaxResultCount,
-                ContinuationToken = _storedProcedureResponse.Resource.ContinuationToken,
-                PartialAggregate = _storedProcedureResponse.Resource.PartialAggregate,
-                ReturnedResultCount = _storedProcedureResponse.Resource.ReturnedResultCount,
-            };
-
-            return JsonConvert.SerializeObject(queryStateForResponseContinuation);
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
