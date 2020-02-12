@@ -52,11 +52,11 @@
 
   <ItemGroup>
     <PackageReference Include="CodeTiger.CodeAnalysis" Version="1.0.0">
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.6.0" />
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="CodeTiger.Core" Version="2.0.0-beta10" />
-    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.4.1" />
   </ItemGroup>
 
   <ItemGroup>
