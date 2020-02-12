@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
+﻿using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Threading;
@@ -88,8 +86,13 @@ namespace CodeTiger.Azure.Cosmos
                             new StoredProcedureProperties(_storedProcedure.Id, _storedProcedure.Body))
                         .ConfigureAwait(false);
                 }
-                catch (CosmosException ex2) when (ex2.StatusCode == HttpStatusCode.Conflict)
+                catch (CosmosException ex2)
                 {
+                    if (ex2.StatusCode != HttpStatusCode.Conflict)
+                    {
+                        throw;
+                    }
+
                     // The stored procedure was likely just now created by something else
                 }
 
