@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using CodeTiger.Azure.Cosmos.Expressions;
 using UnitTests.CodeTiger.Azure.Cosmos.TestDocumentTypes;
@@ -8,7 +6,7 @@ using Xunit;
 
 namespace UnitTests.CodeTiger.Azure.Cosmos.Expressions
 {
-    public static class OrderByClauseVisitorTests
+    public static class QueryOrderByClauseVisitorTests
     {
         public static class Visit_Expression
         {
