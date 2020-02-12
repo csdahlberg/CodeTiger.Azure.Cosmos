@@ -80,7 +80,8 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                     throw new NotImplementedException();
             }
 
-            if (!memberType.IsPrimitive && memberType != typeof(string) && memberType != typeof(decimal))
+            if (string.IsNullOrEmpty(currentMemberPath) && !memberType.IsPrimitive && memberType != typeof(string)
+                && memberType != typeof(decimal))
             {
                 throw new NotImplementedException();
             }
