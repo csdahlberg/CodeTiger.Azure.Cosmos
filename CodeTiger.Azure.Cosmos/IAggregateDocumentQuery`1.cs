@@ -23,6 +23,7 @@ namespace CodeTiger.Azure.Cosmos
         /// </param>
         /// <returns>An <see cref="AggregateQueryResponse{T}"/> object containing the next page of aggregate
         /// results and additional information about the current execution.</returns>
-        Task<AggregateQueryResponse<T>> ExecuteNextAsync(CancellationToken cancellationToken);
+        Task<AggregateQueryResponse<T>> ExecuteNextAsync(
+            CancellationToken cancellationToken = default(CancellationToken));
     }
 }
