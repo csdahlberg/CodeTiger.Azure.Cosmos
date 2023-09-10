@@ -27,7 +27,7 @@ namespace CodeTiger.Azure.Cosmos
 
             var expressions = GetQueryExpressions(expression);
 
-            var queryParameters = new Dictionary<string, object>();
+            var queryParameters = new Dictionary<string, object?>();
 
             string storedProcedureBody = new StringBuilder(StoredProcedureTemplate)
                 .Replace(QueryPlaceholder, GetQuery(expressions, queryParameters))
@@ -98,7 +98,7 @@ namespace CodeTiger.Azure.Cosmos
             return expressions;
         }
 
-        private static string GetQuery(QueryExpressions expressions, Dictionary<string, object> queryParameters)
+        private static string GetQuery(QueryExpressions expressions, Dictionary<string, object?> queryParameters)
         {
             var queryBuilder = new StringBuilder("SELECT * FROM root r");
 
@@ -139,6 +139,11 @@ namespace CodeTiger.Azure.Cosmos
 
         private static string GetCreateAggregateFunction(QueryExpressions expressions)
         {
+            if (expressions.CreateAggregateExpression == null)
+            {
+                throw new InvalidOperationException();
+            }
+
             return "return " + CreateAggregateVisitor.Visit(expressions.CreateAggregateExpression) + ";";
         }
 
@@ -174,11 +179,11 @@ namespace CodeTiger.Azure.Cosmos
 
         private class QueryExpressions
         {
-            public List<Expression> WhereExpressions { get; private set; }
-            public Expression GroupByExpression { get; private set; }
-            public Expression CreateAggregateSeedExpression { get; private set; }
-            public Expression CreateAggregateExpression { get; private set; }
-            public Expression CreateResultExpression { get; private set; }
+            public List<Expression>? WhereExpressions { get; private set; }
+            public Expression? GroupByExpression { get; private set; }
+            public Expression? CreateAggregateSeedExpression { get; private set; }
+            public Expression? CreateAggregateExpression { get; private set; }
+            public Expression? CreateResultExpression { get; private set; }
 
             public void AddWhereExpression(Expression expression)
             {

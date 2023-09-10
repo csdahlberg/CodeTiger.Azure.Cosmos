@@ -45,7 +45,7 @@ namespace CodeTiger.Azure.Cosmos
         /// Gets a continuation token that can be used to continue the aggregate query in a subsequent request,
         /// or <c>null</c> if the query has completed.
         /// </summary>
-        public string ResponseContinuation => _storedProcedureResponse.Resource.ContinuationToken;
+        public string? ResponseContinuation => _storedProcedureResponse.Resource.ContinuationToken;
         
         internal AggregateQueryResponse(StoredProcedureExecuteResponse<AggregateDocumentQueryState> response)
         {

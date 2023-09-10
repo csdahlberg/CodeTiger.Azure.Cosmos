@@ -190,7 +190,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                 return "null";
             }
 
-            object evaluatedValue = ExpressionUtilities.GetEvaluatedValue(expression);
+            object? evaluatedValue = ExpressionUtilities.GetEvaluatedValue(expression);
 
             if (evaluatedValue == null)
             {
@@ -245,7 +245,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
         private static string VisitSubExpression(MemberExpression expression,
             ParameterExpression firstParameter)
         {
-            switch (expression.Expression.NodeType)
+            switch (expression.Expression?.NodeType)
             {
                 case ExpressionType.Parameter:
                     return VisitSubExpression((ParameterExpression)expression.Expression, firstParameter)
@@ -268,8 +268,8 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                 throw new NotImplementedException();
             }
 
-            object defaultValue = Activator.CreateInstance(expression.NewExpression.Type,
-                expression.NewExpression.Arguments.Cast<ConstantExpression>().Select(x => x.Value).ToArray());
+            object? defaultValue = Activator.CreateInstance(expression.NewExpression.Type,
+                expression.NewExpression.Arguments?.Cast<ConstantExpression>().Select(x => x.Value).ToArray());
 
             var sb = new StringBuilder("{ ");
 
@@ -368,8 +368,8 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                 throw new NotImplementedException();
             }
 
-            object defaultValue = Activator.CreateInstance(expression.Type,
-                expression.Arguments.Cast<ConstantExpression>().Select(x => x.Value).ToArray());
+            object? defaultValue = Activator.CreateInstance(expression.Type,
+                expression.Arguments?.Cast<ConstantExpression>().Select(x => x.Value).ToArray());
 
             var sb = new StringBuilder("{ ");
 

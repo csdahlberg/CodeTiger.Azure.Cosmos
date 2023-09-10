@@ -42,7 +42,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
             return true;
         }
 
-        public static object GetEvaluatedValue(ConstantExpression expression)
+        public static object? GetEvaluatedValue(ConstantExpression expression)
         {
             if (expression.Type.IsCompilerGenerated())
             {

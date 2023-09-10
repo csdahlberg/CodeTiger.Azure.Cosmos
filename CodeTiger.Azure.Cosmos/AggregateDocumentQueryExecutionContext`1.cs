@@ -19,8 +19,8 @@ namespace CodeTiger.Azure.Cosmos
         private readonly Expression _expression;
         private readonly AggregateQueryOptions _queryOptions;
 
-        private AggregateStoredProcedure _storedProcedure;
-        private AggregateDocumentQueryState _queryState;
+        private AggregateStoredProcedure? _storedProcedure;
+        private AggregateDocumentQueryState? _queryState;
 
         /// <summary>
         /// Gets whether all results of the <see cref="IAggregateDocumentQuery{T}"/> instance have been returned.
@@ -83,7 +83,8 @@ namespace CodeTiger.Azure.Cosmos
                 {
                     await _container.Scripts
                         .CreateStoredProcedureAsync(
-                            new StoredProcedureProperties(_storedProcedure.Id, _storedProcedure.Body))
+                            new StoredProcedureProperties(_storedProcedure.Id, _storedProcedure.Body),
+                            cancellationToken: cancellationToken)
                         .ConfigureAwait(false);
                 }
                 catch (CosmosException ex2)

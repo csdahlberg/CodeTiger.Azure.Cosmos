@@ -22,7 +22,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
         /// <returns>A filter for the <c>WHERE</c> clause of a SQL query used to retrieve source documents. For
         /// example, <c>r.customerId = 18502 AND c.date > '2019-03-18T00:00:00.0000000Z'</c>.</returns>
         /// <remarks>The identifier for the root document in the query is <c>r</c>.</remarks>
-        public static string Visit(Expression expression, IDictionary<string, object> queryParameters)
+        public static string Visit(Expression expression, IDictionary<string, object?> queryParameters)
         {
             Guard.ArgumentIsNotNull(nameof(expression), expression);
             Guard.ArgumentIsValid(nameof(expression), expression.NodeType == ExpressionType.Lambda);
@@ -37,7 +37,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
         }
 
         private static string VisitSubExpression(Expression expression, ParameterExpression sourceParameter,
-            IDictionary<string, object> queryParameters)
+            IDictionary<string, object?> queryParameters)
         {
             switch (expression.NodeType)
             {
@@ -106,7 +106,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
         }
 
         private static string VisitSubExpression(BinaryExpression expression, ParameterExpression sourceParameter,
-            IDictionary<string, object> queryParameters)
+            IDictionary<string, object?> queryParameters)
         {
             switch (expression.NodeType)
             {
@@ -176,13 +176,13 @@ namespace CodeTiger.Azure.Cosmos.Expressions
         }
 
         private static string VisitSubExpression(ConditionalExpression expression,
-            ParameterExpression sourceParameter, IDictionary<string, object> queryParameters)
+            ParameterExpression sourceParameter, IDictionary<string, object?> queryParameters)
         {
             throw new NotImplementedException();
         }
 
         private static string VisitSubExpression(ConstantExpression expression,
-            IDictionary<string, object> queryParameters)
+            IDictionary<string, object?> queryParameters)
         {
             if (expression.Type == typeof(string) || expression.Type == typeof(decimal)
                 || expression.Type.IsPrimitive)
@@ -197,39 +197,39 @@ namespace CodeTiger.Azure.Cosmos.Expressions
         }
 
         private static string VisitSubExpression(DefaultExpression expression, ParameterExpression sourceParameter,
-            IDictionary<string, object> queryParameters)
+            IDictionary<string, object?> queryParameters)
         {
             throw new NotImplementedException();
         }
 
         private static string VisitSubExpression(IndexExpression expression, ParameterExpression sourceParameter,
-            IDictionary<string, object> queryParameters)
+            IDictionary<string, object?> queryParameters)
         {
             throw new NotImplementedException();
         }
 
         private static string VisitSubExpression(InvocationExpression expression,
-             ParameterExpression sourceParameter, IDictionary<string, object> queryParameters)
+             ParameterExpression sourceParameter, IDictionary<string, object?> queryParameters)
         {
             throw new NotImplementedException();
         }
 
         private static string VisitSubExpression(LambdaExpression expression, ParameterExpression sourceParameter,
-            IDictionary<string, object> queryParameters)
+            IDictionary<string, object?> queryParameters)
         {
             throw new NotImplementedException();
         }
 
         private static string VisitSubExpression(ListInitExpression expression,
-            ParameterExpression sourceParameter, IDictionary<string, object> queryParameters)
+            ParameterExpression sourceParameter, IDictionary<string, object?> queryParameters)
         {
             throw new NotImplementedException();
         }
 
         private static string VisitSubExpression(MemberExpression expression, ParameterExpression sourceParameter,
-            IDictionary<string, object> queryParameters)
+            IDictionary<string, object?> queryParameters)
         {
-            switch (expression.Expression.NodeType)
+            switch (expression.Expression?.NodeType)
             {
                 case ExpressionType.Parameter:
                     return VisitSubExpression((ParameterExpression)expression.Expression, sourceParameter)
@@ -243,30 +243,30 @@ namespace CodeTiger.Azure.Cosmos.Expressions
         }
 
         private static string VisitSubExpression(MemberInitExpression expression,
-             ParameterExpression sourceParameter, IDictionary<string, object> queryParameters)
+             ParameterExpression sourceParameter, IDictionary<string, object?> queryParameters)
         {
             throw new NotImplementedException();
         }
 
         private static string VisitSubExpression(MethodCallExpression expression,
-            ParameterExpression sourceParameter, IDictionary<string, object> queryParameters)
+            ParameterExpression sourceParameter, IDictionary<string, object?> queryParameters)
         {
             throw new NotImplementedException();
         }
 
         private static string VisitSubExpression(NewArrayExpression expression,
-            ParameterExpression sourceParameter, IDictionary<string, object> queryParameters)
+            ParameterExpression sourceParameter, IDictionary<string, object?> queryParameters)
         {
             throw new NotImplementedException();
         }
 
         private static string VisitSubExpression(NewExpression expression,
-            IDictionary<string, object> queryParameters)
+            IDictionary<string, object?> queryParameters)
         {
             if (expression.Type == typeof(DateTime))
             {
-                var constructorParameters = expression.Constructor.GetParameters();
-                if (constructorParameters.Length == 3
+                var constructorParameters = expression.Constructor?.GetParameters();
+                if (constructorParameters?.Length == 3
                     && constructorParameters[0].ParameterType == typeof(int)
                     && constructorParameters[1].ParameterType == typeof(int)
                     && constructorParameters[2].ParameterType == typeof(int))
@@ -277,7 +277,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
 
                         queryParameters[parameterName] = string.Join("-",
                             expression.Arguments.Cast<ConstantExpression>()
-                                .Select(x => ((int)x.Value).ToString("00", CultureInfo.InvariantCulture)));
+                                .Select(x => ((int)x.Value!).ToString("00", CultureInfo.InvariantCulture)));
 
                         return parameterName;
                     }
@@ -299,7 +299,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
         }
 
         private static string VisitSubExpression(UnaryExpression expression, ParameterExpression sourceParameter,
-            IDictionary<string, object> queryParameters)
+            IDictionary<string, object?> queryParameters)
         {
             switch (expression.NodeType)
             {
@@ -317,7 +317,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
             }
         }
 
-        private static string GetNewParameterName(IDictionary<string, object> queryParameters)
+        private static string GetNewParameterName(IDictionary<string, object?> queryParameters)
         {
             return $"@p{queryParameters.Count + 1}";
         }

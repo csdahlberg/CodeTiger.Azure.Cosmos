@@ -92,7 +92,7 @@ namespace CodeTiger.Azure.Cosmos.Expressions
                 newMemberPath = newMemberPath + "." + currentMemberPath;
             }
 
-            switch (expression.Expression.NodeType)
+            switch (expression.Expression?.NodeType)
             {
                 case ExpressionType.Parameter:
                     VisitSubExpression((ParameterExpression)expression.Expression, currentParameter,

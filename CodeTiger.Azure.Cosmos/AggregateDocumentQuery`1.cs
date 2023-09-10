@@ -15,7 +15,7 @@ namespace CodeTiger.Azure.Cosmos
         private readonly Container _container;
         private readonly AggregateQueryOptions _queryOptions;
 
-        private IAggregateDocumentQueryExecutionContext<T> _executionContext;
+        private IAggregateDocumentQueryExecutionContext<T>? _executionContext;
 
         /// <summary>
         /// Gets the expression tree that is associated with this instance of
@@ -54,7 +54,7 @@ namespace CodeTiger.Azure.Cosmos
         /// <param name="expression">The expression representing the query for aggregate data, or <c>null</c> if
         /// this is the initial <see cref="AggregateDocumentQuery{T}"/> being created for a query.</param>
         public AggregateDocumentQuery(Container container, AggregateQueryOptions queryOptions,
-            Expression expression)
+            Expression? expression)
         {
             _container = container;
             _queryOptions = queryOptions;

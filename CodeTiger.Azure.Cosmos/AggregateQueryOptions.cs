@@ -20,6 +20,6 @@ namespace CodeTiger.Azure.Cosmos
         /// <summary>
         /// Gets or sets the token used to continue the aggregate query from a previous request.
         /// </summary>
-        public string RequestContinuation { get; set; }
+        public string? RequestContinuation { get; set; }
     }
 }

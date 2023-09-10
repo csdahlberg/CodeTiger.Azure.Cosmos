@@ -28,7 +28,7 @@ namespace CodeTiger.Azure.Cosmos
         /// Gets the parameters to be passed in to the <c>SELECT</c> query used to retrieve the documents to be
         /// aggregated together.
         /// </summary>
-        public IReadOnlyDictionary<string, object> Parameters { get; }
+        public IReadOnlyDictionary<string, object?> Parameters { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateStoredProcedure"/> class.
@@ -36,7 +36,7 @@ namespace CodeTiger.Azure.Cosmos
         /// <param name="body">The source code of the stored procedure.</param>
         /// <param name="parameters">The parameters to be passed in to the <c>SELECT</c> query used to retrieve the
         /// documents to be aggregated together.</param>
-        public AggregateStoredProcedure(string body, IReadOnlyDictionary<string, object> parameters)
+        public AggregateStoredProcedure(string body, IReadOnlyDictionary<string, object?> parameters)
         {
             Body = body;
             Parameters = parameters;
@@ -44,7 +44,7 @@ namespace CodeTiger.Azure.Cosmos
             _id = new Lazy<string>(() => CalculateId(Body));
         }
 
-        private string CalculateId(string body)
+        private static string CalculateId(string body)
         {
             using (var hash = SHA256.Create())
             {
