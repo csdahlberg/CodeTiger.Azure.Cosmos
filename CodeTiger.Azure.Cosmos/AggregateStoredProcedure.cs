@@ -5,57 +5,55 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace CodeTiger.Azure.Cosmos
+namespace CodeTiger.Azure.Cosmos;
+
+/// <summary>
+/// Represents a stored procedure used to aggregate data from documents in Cosmos DB.
+/// </summary>
+internal class AggregateStoredProcedure
 {
+    private readonly Lazy<string> _id;
+
     /// <summary>
-    /// Represents a stored procedure used to aggregate data from documents in Cosmos DB.
+    /// Gets the ID of the stored procedure.
     /// </summary>
-    internal class AggregateStoredProcedure
+    public string Id => _id.Value;
+
+    /// <summary>
+    /// Gets the source code of the stored procedure.
+    /// </summary>
+    public string Body { get; }
+
+    /// <summary>
+    /// Gets the parameters to be passed in to the <c>SELECT</c> query used to retrieve the documents to be
+    /// aggregated together.
+    /// </summary>
+    public IReadOnlyDictionary<string, object?> Parameters { get; }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AggregateStoredProcedure"/> class.
+    /// </summary>
+    /// <param name="body">The source code of the stored procedure.</param>
+    /// <param name="parameters">The parameters to be passed in to the <c>SELECT</c> query used to retrieve the
+    /// documents to be aggregated together.</param>
+    public AggregateStoredProcedure(string body, IReadOnlyDictionary<string, object?> parameters)
     {
-        private readonly Lazy<string> _id;
+        Body = body;
+        Parameters = parameters;
 
-        /// <summary>
-        /// Gets the ID of the stored procedure.
-        /// </summary>
-        public string Id => _id.Value;
+        _id = new Lazy<string>(() => CalculateId(Body));
+    }
 
-        /// <summary>
-        /// Gets the source code of the stored procedure.
-        /// </summary>
-        public string Body { get; }
-
-        /// <summary>
-        /// Gets the parameters to be passed in to the <c>SELECT</c> query used to retrieve the documents to be
-        /// aggregated together.
-        /// </summary>
-        public IReadOnlyDictionary<string, object?> Parameters { get; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AggregateStoredProcedure"/> class.
-        /// </summary>
-        /// <param name="body">The source code of the stored procedure.</param>
-        /// <param name="parameters">The parameters to be passed in to the <c>SELECT</c> query used to retrieve the
-        /// documents to be aggregated together.</param>
-        public AggregateStoredProcedure(string body, IReadOnlyDictionary<string, object?> parameters)
+    private static string CalculateId(string body)
+    {
+        using (var hash = SHA256.Create())
         {
-            Body = body;
-            Parameters = parameters;
-
-            _id = new Lazy<string>(() => CalculateId(Body));
+            return "codeTigerAggregate_" + ConvertToIdSafeString(hash.ComputeHash(Encoding.UTF8.GetBytes(body)));
         }
+    }
 
-        private static string CalculateId(string body)
-        {
-            using (var hash = SHA256.Create())
-            {
-                return "codeTigerAggregate_"
-                    + ConvertToIdSafeString(hash.ComputeHash(Encoding.UTF8.GetBytes(body)));
-            }
-        }
-
-        private static string ConvertToIdSafeString(byte[] input)
-        {
-            return string.Concat(input.Select(x => x.ToString("x2", CultureInfo.InvariantCulture)));
-        }
+    private static string ConvertToIdSafeString(byte[] input)
+    {
+        return string.Concat(input.Select(x => x.ToString("x2", CultureInfo.InvariantCulture)));
     }
 }

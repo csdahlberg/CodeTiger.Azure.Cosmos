@@ -1,13 +1,13 @@
-﻿namespace CodeTiger.Azure.Cosmos
+﻿namespace CodeTiger.Azure.Cosmos;
+
+internal static partial class AggregateDocumentQueryEvaluator
 {
-    internal static partial class AggregateDocumentQueryEvaluator
-    {
-        private const string QueryPlaceholder = "$(Query)";
-        private const string CreateAggregateSeedFunctionPlaceholder = "$(CreateAggregateSeedFunction)";
-        private const string CreateAggregateFunctionPlaceholder = "$(CreateAggregateFunction)";
-        private const string ShouldStartNewAggregateFunctionPlaceholder = "$(ShouldStartNewAggregateFunction)";
-        private const string CreateResultFunctionPlaceholder = "$(CreateResultFunction)";
-        private const string StoredProcedureTemplate = @"// ***
+    private const string QueryPlaceholder = "$(Query)";
+    private const string CreateAggregateSeedFunctionPlaceholder = "$(CreateAggregateSeedFunction)";
+    private const string CreateAggregateFunctionPlaceholder = "$(CreateAggregateFunction)";
+    private const string ShouldStartNewAggregateFunctionPlaceholder = "$(ShouldStartNewAggregateFunction)";
+    private const string CreateResultFunctionPlaceholder = "$(CreateResultFunction)";
+    private const string StoredProcedureTemplate = @"// ***
 // *** DO NOT MODIFY THIS STORED PROCEDURE
 // ***
 // This stored procedure was automatically created by the CodeTiger.Azure.Cosmos library to facilitate queries
@@ -107,5 +107,4 @@ function shouldStartNewAggregate(previous, current) {
 function createResult(aggregate) {
     $(CreateResultFunction)
 }";
-    }
 }

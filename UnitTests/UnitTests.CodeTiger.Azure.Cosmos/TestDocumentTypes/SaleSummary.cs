@@ -1,23 +1,22 @@
 ﻿using Newtonsoft.Json;
 
-namespace UnitTests.CodeTiger.Azure.Cosmos.TestDocumentTypes
+namespace UnitTests.CodeTiger.Azure.Cosmos.TestDocumentTypes;
+
+internal class SaleSummary
 {
-    internal class SaleSummary
+    [JsonProperty("averageAmount")]
+    public decimal AverageAmount { get; set; }
+
+    [JsonProperty("totalAmount")]
+    public decimal TotalAmount { get; set; }
+
+    public SaleSummary()
     {
-        [JsonProperty("averageAmount")]
-        public decimal AverageAmount { get; set; }
+        AverageAmount = 0.3m;
+    }
 
-        [JsonProperty("totalAmount")]
-        public decimal TotalAmount { get; set; }
-
-        public SaleSummary()
-        {
-            AverageAmount = 0.3m;
-        }
-
-        public SaleSummary(decimal averageAmount)
-        {
-            AverageAmount = averageAmount;
-        }
+    public SaleSummary(decimal averageAmount)
+    {
+        AverageAmount = averageAmount;
     }
 }

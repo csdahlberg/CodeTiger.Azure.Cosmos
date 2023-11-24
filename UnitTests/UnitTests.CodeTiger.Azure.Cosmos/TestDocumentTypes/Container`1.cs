@@ -1,10 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-namespace UnitTests.CodeTiger.Azure.Cosmos.TestDocumentTypes
+namespace UnitTests.CodeTiger.Azure.Cosmos.TestDocumentTypes;
+
+internal class Container<T>
 {
-    internal class Container<T>
-    {
-        [JsonProperty("value")]
-        public T Value { get; set; }
-    }
+    [JsonProperty("value")]
+    public T Value { get; set; }
 }
