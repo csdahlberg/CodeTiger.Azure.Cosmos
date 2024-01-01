@@ -46,10 +46,14 @@ internal class AggregateStoredProcedure
 
     private static string CalculateId(string body)
     {
+#if NET6_0_OR_GREATER
+        return "codeTigerAggregate_" + ConvertToIdSafeString(SHA256.HashData(Encoding.UTF8.GetBytes(body)));
+#else
         using (var hash = SHA256.Create())
         {
             return "codeTigerAggregate_" + ConvertToIdSafeString(hash.ComputeHash(Encoding.UTF8.GetBytes(body)));
         }
+#endif
     }
 
     private static string ConvertToIdSafeString(byte[] input)

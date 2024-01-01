@@ -202,16 +202,12 @@ public static class AggregateQueryableExtensions
 
     [SuppressMessage("Style", "IDE0060:Remove unused parameter",
         Justification = "These parameters are used via reflection.")]
-    [SuppressMessage("Usage", "CA1801:Review unused parameters",
-        Justification = "These parameters are used via reflection.")]
     private static MethodInfo GetMethodInfo<T1, T2, TResult>(Func<T1, T2, TResult> func, T1 unused, T2 unused2)
     {
         return func.Method;
     }
 
     [SuppressMessage("Style", "IDE0060:Remove unused parameter",
-        Justification = "These parameters are used via reflection.")]
-    [SuppressMessage("Usage", "CA1801:Review unused parameters",
         Justification = "These parameters are used via reflection.")]
     private static MethodInfo GetMethodInfo<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func, T1 unused1,
         T2 unused2, T3 unused3)

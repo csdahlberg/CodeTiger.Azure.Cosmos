@@ -15,7 +15,7 @@ internal class AggregateDocumentQuery<T> : IAggregateDocumentQuery<T>, IAggregat
     private readonly Container _container;
     private readonly AggregateQueryOptions _queryOptions;
 
-    private IAggregateDocumentQueryExecutionContext<T>? _executionContext;
+    private AggregateDocumentQueryExecutionContext<T>? _executionContext;
 
     /// <summary>
     /// Gets the expression tree that is associated with this instance of <see cref="AggregateDocumentQuery{T}"/>.

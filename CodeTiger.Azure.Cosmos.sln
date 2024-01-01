@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28531.58
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34310.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{8DA2DA2B-8889-45E9-9FC9-D2B0E2CB02B2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeTiger.Azure.Cosmos", "CodeTiger.Azure.Cosmos\CodeTiger.Azure.Cosmos.csproj", "{7445A965-1C0F-466E-A81E-F0A993AE30CC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests.CodeTiger.Azure.Cosmos", "UnitTests\UnitTests.CodeTiger.Azure.Cosmos\UnitTests.CodeTiger.Azure.Cosmos.csproj", "{9BC66C7A-862D-4ACB-82C7-9EE364452D1E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{64733F89-8E19-47CE-8A74-7343BC8226F0}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

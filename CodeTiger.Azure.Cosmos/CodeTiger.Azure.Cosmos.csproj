@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
+    <OutputPath>..\Build\$(Configuration)\</OutputPath>
+    <DocumentationFile>..\Build\$(Configuration)\$(TargetFramework)\CodeTiger.Azure.Cosmos.xml</DocumentationFile>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <VersionPrefix>0.0.1</VersionPrefix>
@@ -31,19 +33,11 @@
     <RepositoryUrl>https://github.com/csdahlberg/CodeTiger.Azure.Cosmos.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <AnalysisLevel>latest</AnalysisLevel>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\Build\Debug\</OutputPath>
-    <DocumentationFile>..\Build\Debug\$(TargetFramework)\CodeTiger.Azure.Cosmos.xml</DocumentationFile>
+    <AnalysisLevel>8.0</AnalysisLevel>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\Build\Release\</OutputPath>
-    <DocumentationFile>..\Build\Release\$(TargetFramework)\CodeTiger.Azure.Cosmos.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <WarningsAsErrors />
   </PropertyGroup>
 
   <ItemGroup>
